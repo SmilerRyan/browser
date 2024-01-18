@@ -15,45 +15,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-20.04, windows-latest]
+        platform: [windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Git Semantic Version
-        # You may pin to the exact commit or the version.
-        # uses: Hathoute/semantic-version@3039ecb9dc6bb3a84585cc13e930dca19d9924c8
-        uses: PaulHatch/semantic-version@v5.0.3
-        id: semver
-        with:
-          bump_each_commit: true
-          enable_prerelease_mode: true
-
-      - name: Update Version
-        uses: MathieuSoysal/replace-string-in-file@v1.0.0
-        with:
-          file: "src-tauri/tauri.conf.json"
-          old-string: "0.0.1"
-          new-string: ${{ steps.semver.outputs.version }}
-
-#      - name: "[DEBUG] Read tauri config"
-#        id: read_file
-#        uses: andstor/file-reader-action@v1
-#        with:
-#          path: "src-tauri/tauri.conf.json"
-
-#      - name: "[DEBUG] Echo tauri config"
-#        run: echo "${{ steps.read_file.outputs.contents }}"
-
-      - name: Install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-20.04'
-        # You can remove libayatana-appindicator3-dev if you don't use the system tray feature.
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libayatana-appindicator3-dev librsvg2-dev
 
       - name: Rust setup
         uses: dtolnay/rust-toolchain@stable
@@ -71,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ steps.semver.outputs.version_tag }}
-          releaseName: 'XBHive Manager v__VERSION__'
+          releaseName: 'Bing Chat v__VERSION__'
           releaseBody: 'See the assets to download and install this version.'
           releaseDraft: false
           prerelease: true
