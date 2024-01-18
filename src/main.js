@@ -1,1 +1,1 @@
-window.location.replace("https://www.thehiveforums.com/admin_e.php?xbhm/user-manager/");
+window.location.replace("https://www.bing.com/search?q=chat&showconv=1");
