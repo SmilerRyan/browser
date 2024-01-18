@@ -13,10 +13,10 @@ fn main() {
             tauri::WindowBuilder::new(
                 &handle,
                 "main",
-                tauri::WindowUrl::External("https://thehiveforums.com/admin_e.php?xbhm/user-manager/".parse().unwrap())
+                tauri::WindowUrl::External("https://www.bing.com/search?q=chat&showconv=1".parse().unwrap())
               )
               .initialization_script(include_str!("./preload.js"))
-              .title("XBHive Manager")
+              .title("Bing Chat")
               .build().unwrap();
             Ok(())
         })
